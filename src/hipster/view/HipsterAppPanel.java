@@ -3,15 +3,17 @@ package hipster.view;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing .JTextField;
+import javax.swing.*;
 import javax.swing.SpringLayout;
 import hipster.controller.HipsterAppController;
+import java.awt.event.*;
+import java.awt.Color;
 
 public class HipsterAppPanel extends JPanel
 {
-	private JButton firstButton;
-	private JTextField firstTextField;
 	private SpringLayout baseLayout;
 	private HipsterAppController baseController;
+	private JComboBox <String>phraseComboBox;
 	
 	
 	public HipsterAppPanel(HipsterAppController baseController)
@@ -19,12 +21,25 @@ public class HipsterAppPanel extends JPanel
 		this.baseController = baseController;
 		
 		baseLayout = new SpringLayout();
-		firstButton = new JButton("ANSWER");
-		firstTextField = new JTextField("Question of Life");
 		
+		setupComboBox();
 		setupPanel();
 		setupLayout();
 		setupListeners();
+	}
+	
+	private void setupComboBox()
+	{
+		String [] phrases = baseController.getFirstHipster().getHipsterPhrases();
+		DefaultComboBoxModel phraseModel = new DefaultComboBoxModel(Model);
+		phraseComboBox.setModel(phraseModel);
+	}
+	
+	public void setupPanel()
+	{
+		this.setLayout(baseLayout);
+		this.setBackground(Color.BLUE);
+		this.add(phraseComboBox);
 	}
 	
 	public void setupLayout()
@@ -32,16 +47,20 @@ public class HipsterAppPanel extends JPanel
 		
 	}
 	
-	public void setupPanel()
-	{
-		this.setLayout(baseLayout);
-		this.add(firstButton);
-		this.add(firstTextField);
-	}
-	
 	public void setupListeners()
 	{
-		
+		phraseComboBox.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent selection)
+			{
+				int red = (int) (Math.random() * 256);
+				int blue = (int) (Math.random() * 256);
+				int green = (int) (Math.random() * 256);
+				setBackground(new Color(red, green, blue));
+				String updatedTitle = phraseComboBox.getSelectedItem().toString();
+				baseController.getBaseFrame().setTitle(updatedTitle);
+			}
+		});
 	}
 
 }
