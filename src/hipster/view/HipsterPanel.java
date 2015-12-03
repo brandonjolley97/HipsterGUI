@@ -10,7 +10,7 @@ import hipster.controller.HipsterAppController;
 import java.awt.event.*;
 import java.awt.Color;
 
-public class HipsterAppPanel extends JPanel
+public class HipsterPanel extends JPanel
 {
 	private SpringLayout baseLayout;
 	private HipsterAppController baseController;
@@ -25,7 +25,7 @@ public class HipsterAppPanel extends JPanel
 	private int startClicks;
 	
 	
-	public HipsterAppPanel(HipsterAppController baseController)
+	public HipsterPanel(HipsterAppController baseController)
 	{
 		this.baseController = baseController;
 		

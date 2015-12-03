@@ -8,12 +8,12 @@ public class HipsterAppFrame extends JFrame
 {
 	
 	private HipsterAppController baseController;
-	private HipsterAppPanel basePanel;
+	private HipsterPanel basePanel;
 	
 	public HipsterAppFrame(HipsterAppController baseController)
 	{
 		this.baseController = baseController;
-		basePanel = new HipsterAppPanel(baseController);
+		basePanel = new HipsterPanel(baseController);
 		setupFrame();
 	}
 	
